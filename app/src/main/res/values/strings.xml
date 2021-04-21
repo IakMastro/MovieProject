@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">MovieProject</string>
+    <string name="search">Search</string>
+    <string name="enter_query">Enter Query</string>
+    <string name="your_rating">Your Rating</string>
+    <string name="rating">Rating</string>
+    <string name="watched">Watched</string>
+    <string name="to_watch">To Watch</string>
+    <string name="plot_info">Plot Info</string>
+    <string name="plot">Plot</string>
+    <string name="year">year</string>
+    <string name="title">title</string>
+    <string name="movie_poster">Movie Poster</string>
+</resources>
