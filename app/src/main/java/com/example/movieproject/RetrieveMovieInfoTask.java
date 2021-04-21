@@ -4,7 +4,6 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 import com.example.movieproject.MovieClasses.MovieInfo;
-import com.example.movieproject.MovieClasses.MovieJSON;
 import com.example.movieproject.MovieClasses.OMDB;
 import com.mashape.unirest.http.exceptions.UnirestException;
 
@@ -23,9 +22,9 @@ public class RetrieveMovieInfoTask extends AsyncTask<String, Void, ArrayList<Mov
     protected ArrayList<MovieInfo> doInBackground(String... strings) {
         ArrayList<MovieInfo> movies = new ArrayList<>();
         try {
-            switch(strings[0]){
+            switch (strings[0]) {
                 case "search":
-                    if(strings.length<3)
+                    if (strings.length < 3)
                         movies = omdb.searchAsMovieInfo(strings[1], "");
                     else
                         movies = omdb.searchAsMovieInfo(strings[1], strings[2]);
@@ -35,12 +34,12 @@ public class RetrieveMovieInfoTask extends AsyncTask<String, Void, ArrayList<Mov
                     return movies;
             }
         } catch (ConnectException e) {
-            Log.e(TAG,e.getMessage());
+            Log.e(TAG, e.getMessage());
         } catch (UnirestException e) {//Cant Access Internet
-            Log.e(TAG,e.getMessage());
+            Log.e(TAG, e.getMessage());
         } catch (JSONException e) {//Nothing found
-            Log.w(TAG,e.getMessage());
-            return new ArrayList<MovieInfo>(){{
+            Log.w(TAG, e.getMessage());
+            return new ArrayList<MovieInfo>() {{
                 add(new MovieInfo());
             }};
         }

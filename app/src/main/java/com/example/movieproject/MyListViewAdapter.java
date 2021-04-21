@@ -2,20 +2,16 @@ package com.example.movieproject;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Parcel;
-import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.example.movieproject.MovieClasses.MovieInfo;
-import com.example.movieproject.MovieClasses.MovieJSON;
 import com.example.movieproject.databinding.ListViewBinding;
 
 import java.util.List;
@@ -23,6 +19,7 @@ import java.util.List;
 public class MyListViewAdapter extends ArrayAdapter<MovieInfo> {
     private int layout;
     private List<MovieInfo> list;
+
     public MyListViewAdapter(@NonNull Context context, int resource, @NonNull List<MovieInfo> objects) {
         super(context, resource, objects);
         this.layout = resource;
@@ -32,9 +29,9 @@ public class MyListViewAdapter extends ArrayAdapter<MovieInfo> {
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-        if(convertView == null){
+        if (convertView == null) {
             LayoutInflater inflater = LayoutInflater.from(this.getContext());
-            convertView = inflater.inflate(layout, parent,false);
+            convertView = inflater.inflate(layout, parent, false);
             MovieInfo info = list.get(position);
             ViewHolder vh = new ViewHolder();
             ListViewBinding binding = ListViewBinding.bind(convertView);
@@ -46,8 +43,8 @@ public class MyListViewAdapter extends ArrayAdapter<MovieInfo> {
 
             convertView.setTag(vh);
 
-            //if we need the lick animation, put it on list view in MainActivity
-            convertView.setOnClickListener((c)->{
+            //if we need the click animation, put it on list view in MainActivity
+            convertView.setOnClickListener((c) -> {
                 //TODO Change view to movie
                 //Toast.makeText(this,""+ ,Toast.LENGTH_SHORT).show();
                 System.out.println(vh.info.imdbId);
@@ -63,7 +60,7 @@ public class MyListViewAdapter extends ArrayAdapter<MovieInfo> {
     }
 }
 
-class ViewHolder{
+class ViewHolder {
     TextView title;
     TextView year;
     MovieInfo info;

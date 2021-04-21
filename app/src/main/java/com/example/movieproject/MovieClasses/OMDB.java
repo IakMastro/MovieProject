@@ -29,13 +29,14 @@ public class OMDB {
                 .routeParam("id", id)
                 .routeParam("key", key)
                 .asJson();
+
         switch (response.getStatus()) {
             case 200:
                 return new MovieInfo(response.getBody().getObject());
             case 502:
                 throw new ConnectException("502 Bad Gateway");
             default:
-                Log.e(TAG, response.getStatus()+" "+response.getStatusText());
+                Log.e(TAG, response.getStatus() + " " + response.getStatusText());
                 throw new IllegalArgumentException();
         }
     }
@@ -45,37 +46,39 @@ public class OMDB {
                 .routeParam("title", title)
                 .routeParam("key", key)
                 .asJson();
+
         switch (response.getStatus()) {
             case 200:
                 return new MovieJSON(response.getBody().getObject());
             case 502:
                 throw new ConnectException("502 Bad Gateway");
             default:
-                Log.e(TAG, response.getStatus()+" "+response.getStatusText());
+                Log.e(TAG, response.getStatus() + " " + response.getStatusText());
                 throw new IllegalArgumentException();
         }
     }
 
     public ArrayList<MovieInfo> searchAsMovieInfo(String query, String type) throws IllegalArgumentException, ConnectException, UnirestException, JSONException {
-        query.replace(' ','+');
+        query.replace(' ', '+');
         HttpResponse<JsonNode> response = Unirest.get("https://www.omdbapi.com/?s={query}&apikey={key}&type={type}")
                 .routeParam("query", query)
                 .routeParam("key", key)
                 .routeParam("type", type)
                 .asJson();
+
         switch (response.getStatus()) {
             case 200:
                 JSONArray obj = response.getBody().getObject().getJSONArray("Search");
                 ArrayList<MovieInfo> movies = new ArrayList<>();
-                for(int i=0;i<obj.length();i++){
-                    movies.add(new MovieInfo((JSONObject)obj.get(i)));
+                for (int i = 0; i < obj.length(); i++) {
+                    movies.add(new MovieInfo((JSONObject) obj.get(i)));
                 }
 
                 return movies;
             case 502:
                 throw new ConnectException("502 Bad Gateway");
             default:
-                Log.e(TAG, response.getStatus()+" "+response.getStatusText());
+                Log.e(TAG, response.getStatus() + " " + response.getStatusText());
                 throw new IllegalArgumentException();
         }
     }
