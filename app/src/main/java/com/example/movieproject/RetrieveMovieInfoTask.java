@@ -21,7 +21,7 @@ public class RetrieveMovieInfoTask extends AsyncTask<String, Void, ArrayList<Mov
 
     @Override
     protected ArrayList<MovieInfo> doInBackground(String... strings) {
-        ArrayList<MovieInfo> movies;
+        ArrayList<MovieInfo> movies = new ArrayList<>();
         try {
             switch(strings[0]){
                 case "search":
@@ -31,10 +31,8 @@ public class RetrieveMovieInfoTask extends AsyncTask<String, Void, ArrayList<Mov
                         movies = omdb.searchAsMovieInfo(strings[1], strings[2]);
                     return movies;
                 case "id":
-                    MovieJSON movie = omdb.getMovieByID(strings[1]);
-                    //System.out.println("Title "+movie.get("Title"));
-                    //movies.add(movie);
-                    break;
+                    movies.add(omdb.getMovieByID(strings[1]));
+                    return movies;
             }
         } catch (ConnectException e) {
             Log.e(TAG,e.getMessage());

@@ -24,14 +24,14 @@ public class OMDB {
         this.key = key;
     }
 
-    public MovieJSON getMovieByID(String id) throws IllegalArgumentException, ConnectException, UnirestException {
-        HttpResponse<JsonNode> response = Unirest.get("https://www.omdbapi.com/?i=tt{id}&apikey={key}")
+    public MovieInfo getMovieByID(String id) throws IllegalArgumentException, ConnectException, UnirestException {
+        HttpResponse<JsonNode> response = Unirest.get("https://www.omdbapi.com/?i={id}&apikey={key}")
                 .routeParam("id", id)
                 .routeParam("key", key)
                 .asJson();
         switch (response.getStatus()) {
             case 200:
-                return new MovieJSON(response.getBody().getObject());
+                return new MovieInfo(response.getBody().getObject());
             case 502:
                 throw new ConnectException("502 Bad Gateway");
             default:
@@ -48,29 +48,6 @@ public class OMDB {
         switch (response.getStatus()) {
             case 200:
                 return new MovieJSON(response.getBody().getObject());
-            case 502:
-                throw new ConnectException("502 Bad Gateway");
-            default:
-                Log.e(TAG, response.getStatus()+" "+response.getStatusText());
-                throw new IllegalArgumentException();
-        }
-    }
-
-    public ArrayList<MovieJSON> search(String query, String type) throws IllegalArgumentException, ConnectException, UnirestException, JSONException {
-        query.replace(' ','+');
-        HttpResponse<JsonNode> response = Unirest.get("https://www.omdbapi.com/?s={query}&apikey={key}&type={type}")
-                .routeParam("query", query)
-                .routeParam("key", key)
-                .routeParam("type", type)
-                .asJson();
-        switch (response.getStatus()) {
-            case 200:
-                MovieJSON movie = new MovieJSON(response.getBody().getObject());
-                ArrayList<MovieJSON> movies = new ArrayList<>();
-                for(String title:movie.find("Title")){
-                    movies.add(getMovieByTitle(title));
-                }
-                return movies;
             case 502:
                 throw new ConnectException("502 Bad Gateway");
             default:

@@ -53,7 +53,7 @@ public class MyListViewAdapter extends ArrayAdapter<MovieInfo> {
                 System.out.println(vh.info.imdbId);
                 Intent i = new Intent(this.getContext(), MovieActivity.class);
                 i.setAction(Intent.ACTION_VIEW);
-                //i.putExtra("viewholder", );
+                i.putExtra("id", vh.info.imdbId);
                 this.getContext().startActivity(i);
             });
         } else {

@@ -13,7 +13,7 @@ public class MovieInfo extends MovieJSON{
     public String year;
     public String imdbId;
     public String type;
-    public URL poster;
+    public String poster;
 
     public MovieInfo(){
         super();
@@ -30,15 +30,17 @@ public class MovieInfo extends MovieJSON{
         this.year = get("Year");
         this.imdbId = get("imdbID");
         this.type = get("Type");
-        try {
-            this.poster = new URL(get("Poster"));
-        } catch (MalformedURLException e) {
-            Log.w(TAG, "No poster URL, poster will be null.");
-            this.poster = null;
-        }
+        this.poster = get("Poster");
     }
 
-    private String[] getAsArray(){
-        return new String[]{title, };
+    @Override
+    public String toString() {
+        return "MovieInfo{" +
+                "title='" + title + '\'' +
+                ", year='" + year + '\'' +
+                ", imdbId='" + imdbId + '\'' +
+                ", type='" + type + '\'' +
+                ", poster='" + poster + '\'' +
+                '}';
     }
 }
