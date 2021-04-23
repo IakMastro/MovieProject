@@ -4,18 +4,28 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
+import com.example.movieproject.POJOs.MovieSearch;
+import com.example.movieproject.POJOs.Search;
 import com.example.movieproject.databinding.ActivityMainBinding;
 
-import java.util.concurrent.ExecutionException;
+import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+
+import static com.example.movieproject.Stuff.API_KEY;
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = MainActivity.class.getSimpleName();
-    private static String type;
     private static final String[] spinner_values = new String[]{"Movie", "Game", "Series"};
+    public static OmdbApi api;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,32 +36,48 @@ public class MainActivity extends AppCompatActivity {
         ArrayAdapter<String> aa = new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item, spinner_values);
         binding.spinnerType.setAdapter(aa);
 
-        binding.spinnerType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String selection = parent.getItemAtPosition(position).toString();
-                if (selection.equals("")) {
-                    onNothingSelected(parent);
-                } else {
-                    type = selection;
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-            }
-        });
+        initApi();
 
         binding.bSearch.setOnClickListener(c -> {
-            try {
-                MyListViewAdapter aa2 = new MyListViewAdapter(binding.lvResults.getContext(),
+            searchOnClick(binding.lvResults,
+                    binding.etQuery.getText().toString().replace(' ', '+'),
+                    binding.spinnerType.getSelectedItem().toString());
+        });
+    }
+
+    private void initApi() {
+        String baseUrl = "https://www.omdbapi.com/";
+        Retrofit r = new Retrofit.Builder()
+                .baseUrl(baseUrl)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        api = r.create(OmdbApi.class);
+    }
+
+    private void searchOnClick(ListView lv, String query, String type) {
+        Call<Search> call = api.getSearch(API_KEY, query, type);
+        call.enqueue(new Callback<Search>() {
+            @Override
+            public void onResponse(Call<Search> call, Response<Search> response) {
+                if (!response.isSuccessful()) {
+                    Log.e(TAG, "Unsuccessful response");
+                    return;
+                }
+                List<MovieSearch> MovieSearches = response.body().getSearch();
+                if (MovieSearches == null) {
+                    //add an item so that a message can be added to the list view
+                    MovieSearches = new ArrayList<>();
+                    MovieSearches.add(new MovieSearch());
+                }
+                MyListViewAdapter aa2 = new MyListViewAdapter(lv.getContext(),
                         R.layout.list_view,
-                        new RetrieveMovieInfoTask().execute("search", binding.etQuery.getText().toString(), type).get());
-                binding.lvResults.setAdapter(aa2);
-            } catch (InterruptedException e) {
-                Log.e(TAG, e.getMessage());
-            } catch (ExecutionException e) {
-                Log.e(TAG, e.getMessage());
+                        MovieSearches);
+                lv.setAdapter(aa2);
+            }
+
+            @Override
+            public void onFailure(Call<Search> call, Throwable t) {
+                Log.e(TAG, t.getMessage());
             }
         });
     }

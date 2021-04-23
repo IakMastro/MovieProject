@@ -13,6 +13,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
+
         android:contentDescription="@string/movie_poster"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -26,6 +27,7 @@
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
         android:text="@string/title"
+        android:gravity="start|center"
         app:layout_constraintStart_toEndOf="@+id/image_poster"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -95,7 +97,7 @@
         android:layout_marginTop="8dp"
         android:text="@string/rating"
         app:layout_constraintStart_toEndOf="@+id/image_poster"
-        app:layout_constraintTop_toBottomOf="@+id/b_toWatch" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_your_rating" />
 
     <TextView
         android:id="@+id/tv_your_rating"
@@ -103,8 +105,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
         android:text="@string/your_rating"
         app:layout_constraintStart_toEndOf="@+id/image_poster"
-        app:layout_constraintTop_toBottomOf="@+id/tv_rating" />
+        app:layout_constraintTop_toBottomOf="@+id/b_toWatch" />
 </androidx.constraintlayout.widget.ConstraintLayout>

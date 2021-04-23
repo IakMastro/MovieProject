@@ -24,8 +24,8 @@
         android:id="@+id/b_search"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:text="@string/search"
-        app:layout_constraintBottom_toTopOf="@+id/lv_results"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/et_query" />
@@ -34,11 +34,11 @@
         android:id="@+id/lv_results"
         android:layout_width="382dp"
         android:layout_height="580dp"
-        android:layout_marginTop="80dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.551"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_query" />
+        app:layout_constraintTop_toBottomOf="@+id/b_search" />
 
     <Spinner
         android:id="@+id/spinner_type"

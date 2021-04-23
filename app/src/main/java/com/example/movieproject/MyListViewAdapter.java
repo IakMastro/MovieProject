@@ -11,16 +11,16 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.example.movieproject.MovieClasses.MovieInfo;
+import com.example.movieproject.POJOs.MovieSearch;
 import com.example.movieproject.databinding.ListViewBinding;
 
 import java.util.List;
 
-public class MyListViewAdapter extends ArrayAdapter<MovieInfo> {
+public class MyListViewAdapter extends ArrayAdapter<MovieSearch> {
     private int layout;
-    private List<MovieInfo> list;
+    private List<MovieSearch> list;
 
-    public MyListViewAdapter(@NonNull Context context, int resource, @NonNull List<MovieInfo> objects) {
+    public MyListViewAdapter(@NonNull Context context, int resource, @NonNull List<MovieSearch> objects) {
         super(context, resource, objects);
         this.layout = resource;
         this.list = objects;
@@ -32,25 +32,30 @@ public class MyListViewAdapter extends ArrayAdapter<MovieInfo> {
         if (convertView == null) {
             LayoutInflater inflater = LayoutInflater.from(this.getContext());
             convertView = inflater.inflate(layout, parent, false);
-            MovieInfo info = list.get(position);
+            String title, year;
+            MovieSearch info = list.get(position);
+            if (info.getTitle() == null) {
+                title = "No results found!";
+                year = "";
+            } else {
+                title = info.getTitle();
+                year = info.getYear();
+            }
+
             ViewHolder vh = new ViewHolder();
             ListViewBinding binding = ListViewBinding.bind(convertView);
-            binding.tvTitle.setText(info.title);
-            binding.tvYear.setText(info.year);
+            binding.tvTitle.setText(title);
+            binding.tvYear.setText(year);
             vh.title = binding.tvTitle;
             vh.year = binding.tvYear;
             vh.info = info;
 
             convertView.setTag(vh);
 
-            //if we need the click animation, put it on list view in MainActivity
             convertView.setOnClickListener((c) -> {
-                //TODO Change view to movie
-                //Toast.makeText(this,""+ ,Toast.LENGTH_SHORT).show();
-                System.out.println(vh.info.imdbId);
                 Intent i = new Intent(this.getContext(), MovieActivity.class);
                 i.setAction(Intent.ACTION_VIEW);
-                i.putExtra("id", vh.info.imdbId);
+                i.putExtra("id", vh.info.getImdbId());
                 this.getContext().startActivity(i);
             });
         } else {
@@ -63,5 +68,5 @@ public class MyListViewAdapter extends ArrayAdapter<MovieInfo> {
 class ViewHolder {
     TextView title;
     TextView year;
-    MovieInfo info;
+    MovieSearch info;
 }
