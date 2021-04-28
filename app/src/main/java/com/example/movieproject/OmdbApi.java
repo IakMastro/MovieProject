@@ -12,7 +12,8 @@ public interface OmdbApi {
     @GET("/")
     Call<Search> getSearch(@Query("apikey") String apikey,
                            @Query("s") String query,
-                           @Query("type") String type);
+                           @Query("type") String type,
+                           @Query("page") int page);
 
     @GET("/")
     Call<MovieId> getMovieFromId(@Query("apikey") String apikey,

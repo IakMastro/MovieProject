@@ -7,7 +7,7 @@ import java.util.List;
 public class Search {
     @SerializedName("Search")
     private List<MovieSearch> search;
-    @SerializedName("TotalResults")
+    @SerializedName("totalResults")
     private String totalResults;
     @SerializedName("Response")
     private String response;

@@ -3,7 +3,7 @@
     <string name="search">Search</string>
     <string name="enter_query">Enter Query</string>
     <string name="your_rating">Your Rating</string>
-    <string name="rating">Rating</string>
+    <string name="rating_imdb">IMDB rating</string>
     <string name="watched">Watched</string>
     <string name="to_watch">To Watch</string>
     <string name="plot_info">Plot Info</string>
@@ -12,4 +12,11 @@
     <string name="title">title</string>
     <string name="movie_poster">Movie Poster</string>
     <string name="temp">temp</string>
+    <string name="search_movie">Search Movie</string>
+    <string name="welcome_to_movie_project">Welcome to Movie Project</string>
+    <string name="genres">Genres</string>
+    <string name="metascore_rating">Metascore rating</string>
+    <string name="genres_info">Genres Info</string>
+    <string name="previous">previous</string>
+    <string name="next">next</string>
 </resources>
