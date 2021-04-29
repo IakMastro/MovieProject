@@ -28,19 +28,21 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-import static com.example.movieproject.Stuff.API_KEY;
-//TODO tv series years can be XXXX-XXXX, make it so it can fit on the activity, somehow
+import static com.example.movieproject.Stuff.OMDB_API_KEY;
+
 public class SearchActivity extends AppCompatActivity {
     private static final String TAG = SearchActivity.class.getSimpleName();
     private static final String[] spinner_values = new String[]{"Movie", "Game", "Series"};
     public static OmdbApi api;
     private static int pageCount, pageMax;
 
+    private ActivitySearchBinding binding;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        ActivitySearchBinding binding = ActivitySearchBinding.inflate(getLayoutInflater());
+        binding = ActivitySearchBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         ArrayAdapter<String> aa = new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item, spinner_values);
@@ -48,14 +50,12 @@ public class SearchActivity extends AppCompatActivity {
 
         initApi();
 
-        binding.etQuery.setOnEditorActionListener((view, id, event)->{
-            if(id == EditorInfo.IME_ACTION_DONE||id == EditorInfo.IME_ACTION_GO||id== EditorInfo.IME_ACTION_NEXT){
+        binding.etQuery.setOnEditorActionListener((view, id, event) -> {
+            if (id == EditorInfo.IME_ACTION_DONE || id == EditorInfo.IME_ACTION_GO || id == EditorInfo.IME_ACTION_NEXT) {
                 pageCount = 1;
                 searchOnClick(binding.lvResults,
                         binding.etQuery.getText().toString().replace(' ', '+'),
                         binding.spinnerType.getSelectedItem().toString());
-                binding.ibPrevious.setVisibility(View.INVISIBLE);
-                binding.ibNext.setVisibility(View.VISIBLE);
                 hideKeyboard(this);
                 return true;
             }
@@ -67,8 +67,6 @@ public class SearchActivity extends AppCompatActivity {
             searchOnClick(binding.lvResults,
                     binding.etQuery.getText().toString().replace(' ', '+'),
                     binding.spinnerType.getSelectedItem().toString());
-            binding.ibPrevious.setVisibility(View.INVISIBLE);
-            binding.ibNext.setVisibility(View.VISIBLE);
             hideKeyboard(this);
         });
 
@@ -78,9 +76,8 @@ public class SearchActivity extends AppCompatActivity {
                 searchOnClick(binding.lvResults,
                         binding.etQuery.getText().toString().replace(' ', '+'),
                         binding.spinnerType.getSelectedItem().toString());
-                binding.ibNext.setVisibility(View.VISIBLE);
             }
-            if (pageCount == 1) binding.ibPrevious.setVisibility(View.INVISIBLE);
+
         });
 
         binding.ibNext.setOnClickListener(c -> {
@@ -89,10 +86,20 @@ public class SearchActivity extends AppCompatActivity {
                 searchOnClick(binding.lvResults,
                         binding.etQuery.getText().toString().replace(' ', '+'),
                         binding.spinnerType.getSelectedItem().toString());
-                binding.ibPrevious.setVisibility(View.VISIBLE);
             }
-            if (pageCount == pageMax) binding.ibNext.setVisibility(View.INVISIBLE);
         });
+    }
+
+    private void setVisibilities() {
+        if (pageCount == 1 || pageMax == 0)
+            binding.ibPrevious.setVisibility(View.INVISIBLE);
+        else
+            binding.ibPrevious.setVisibility(View.VISIBLE);
+
+        if (pageCount == pageMax || pageMax == 0)
+            binding.ibNext.setVisibility(View.INVISIBLE);
+        else
+            binding.ibNext.setVisibility(View.VISIBLE);
     }
 
     private void initApi() {
@@ -105,7 +112,7 @@ public class SearchActivity extends AppCompatActivity {
     }
 
     private void searchOnClick(ListView lv, String query, String type) {
-        Call<Search> call = api.getSearch(API_KEY, query, type, pageCount);
+        Call<Search> call = api.getSearch(OMDB_API_KEY, query, type, pageCount);
         call.enqueue(new Callback<Search>() {
             @Override
             public void onResponse(Call<Search> call, Response<Search> response) {
@@ -118,13 +125,15 @@ public class SearchActivity extends AppCompatActivity {
                     //add an item so that a message can be added to the list view
                     MovieSearches = new ArrayList<>();
                     MovieSearches.add(new MovieSearch());
+                    pageMax = 0;
+                } else {
+                    pageMax = (int) Math.ceil(Integer.parseInt(response.body().getTotalResults()) / 10.0);
                 }
                 MyListViewAdapter aa2 = new MyListViewAdapter(lv.getContext(),
                         R.layout.list_view,
                         MovieSearches);
                 lv.setAdapter(aa2);
-
-                pageMax = (int) Math.ceil(Integer.parseInt(response.body().getTotalResults()) / 10.0);
+                setVisibilities();
             }
 
             @Override

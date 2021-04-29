@@ -21,6 +21,8 @@ import static com.example.movieproject.Activities.SearchActivity.api;
 
 public class MovieActivity extends AppCompatActivity {
     private static final String TAG = SearchActivity.class.getSimpleName();
+    private static MovieId info;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -29,7 +31,7 @@ public class MovieActivity extends AppCompatActivity {
         ActivityMovieBinding binding = ActivityMovieBinding.bind(findViewById(R.id.root_movie));
 
         String id = getIntent().getStringExtra("id");
-        Call<MovieId> call = api.getMovieFromId(Stuff.API_KEY, id);
+        Call<MovieId> call = api.getMovieFromId(Stuff.OMDB_API_KEY, id);
         call.enqueue(new Callback<MovieId>() {
             @Override
             public void onResponse(Call<MovieId> call, Response<MovieId> response) {
@@ -37,17 +39,21 @@ public class MovieActivity extends AppCompatActivity {
                     Log.e(TAG, "Unsuccessful response");
                     return;
                 }
-                MovieId info = response.body();
+                info = response.body();
                 binding.tvTitleMovie.setText(info.getTitle());
                 binding.tvYearMovie.setText(info.getYear());
                 Picasso.get().load(info.getPoster()).into(binding.imagePoster);
                 binding.tvPlotInfo.setText(info.getPlot());
                 binding.tvRatingImdb.setText("IMDB Rating: " + info.getImdbRating());
                 binding.tvRatingMetascore.setText(" Metascore: " + info.getMetascore());
-                binding.tvRatingMetascore.setTextColor
-                        (Integer.parseInt(info.getMetascore()) > 60 ? Color.GREEN //positive
-                                : (Integer.parseInt(info.getMetascore()) >= 40) ? Color.parseColor("#ffcd34") //mixed
-                                : Color.RED); //negative
+                try {
+                    binding.tvRatingMetascore.setTextColor
+                            (Integer.parseInt(info.getMetascore()) > 60 ? Color.GREEN //positive
+                                    : (Integer.parseInt(info.getMetascore()) >= 40) ? Color.parseColor("#ffcd34") //mixed
+                                    : Color.RED); //negative
+                } catch (NumberFormatException exc) {
+                    binding.tvRatingMetascore.setTextColor(Color.GRAY);
+                }
                 binding.tvGenresInfo.setText(info.getGenre());
             }
 
@@ -56,5 +62,26 @@ public class MovieActivity extends AppCompatActivity {
                 Log.e(TAG, t.getMessage());
             }
         });
+
+        binding.bWatched.setOnClickListener(c -> {
+            addToWatched(info);
+        });
+
+        binding.fabWatched.setOnClickListener(c -> {
+            addToWatched(info);
+        });
+
+        binding.bToWatch.setOnClickListener(c -> {
+            addToPlanned(info);
+        });
+    }
+
+    //TODO static method of class that interacts with the database
+    private void addToPlanned(MovieId info) {
+
+    }
+
+    //TODO static method of class that interacts with the database
+    private void addToWatched(MovieId info) {
     }
 }

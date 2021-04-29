@@ -21,13 +21,20 @@
 
     <TextView
         android:id="@+id/tv_title_movie"
-        android:layout_width="194dp"
-        android:layout_height="47dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
-        android:text="@string/title"
+        android:layout_width="180sp"
+        android:layout_height="50sp"
+        android:layout_marginStart="8sp"
+        android:layout_marginLeft="8sp"
+        android:layout_marginTop="8sp"
         android:gravity="start|center"
+        android:maxWidth="210sp"
+        android:text="@string/title"
+        android:textColor="@color/black"
+        android:textSize="@dimen/movieTitles"
+        app:autoSizeMaxTextSize="100sp"
+        app:autoSizeMinTextSize="12sp"
+        app:autoSizeStepGranularity="2sp"
+        app:autoSizeTextType="uniform"
         app:layout_constraintStart_toEndOf="@+id/image_poster"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -36,8 +43,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
         android:text="@string/year"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -59,9 +66,9 @@
         android:id="@+id/tv_plot_info"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginStart="8sp"
+        android:layout_marginLeft="8sp"
+        android:layout_marginTop="8sp"
         android:text="@string/plot_info"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_plot_title" />
@@ -74,6 +81,7 @@
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
         android:text="@string/to_watch"
+        app:layout_constraintEnd_toStartOf="@id/b_watched"
         app:layout_constraintStart_toEndOf="@+id/image_poster"
         app:layout_constraintTop_toBottomOf="@+id/tv_title_movie" />
 
@@ -85,6 +93,7 @@
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
         android:text="@string/watched"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/b_toWatch"
         app:layout_constraintTop_toBottomOf="@+id/tv_title_movie" />
 
@@ -105,6 +114,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
         android:text="@string/your_rating"
         app:layout_constraintStart_toEndOf="@+id/image_poster"
         app:layout_constraintTop_toBottomOf="@+id/b_toWatch" />
@@ -153,8 +163,8 @@
         android:layout_marginBottom="8dp"
         android:clickable="true"
         android:contentDescription="@string/watched"
+        android:focusable="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@android:drawable/ic_menu_add"
-        android:focusable="true" />
+        app:srcCompat="@android:drawable/ic_menu_add" />
 </androidx.constraintlayout.widget.ConstraintLayout>
