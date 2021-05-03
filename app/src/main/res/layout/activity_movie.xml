@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+
     <ImageView
         android:id="@+id/image_poster"
         android:layout_width="128dp"
@@ -28,7 +29,6 @@
         android:layout_marginTop="8sp"
         android:gravity="start|center"
         android:maxWidth="210sp"
-        android:text="@string/title"
         android:textColor="@color/black"
         android:textSize="@dimen/movieTitles"
         app:autoSizeMaxTextSize="100sp"
@@ -45,7 +45,6 @@
         android:layout_marginTop="24dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:text="@string/year"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -69,7 +68,6 @@
         android:layout_marginStart="8sp"
         android:layout_marginLeft="8sp"
         android:layout_marginTop="8sp"
-        android:text="@string/plot_info"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_plot_title" />
 
@@ -137,7 +135,6 @@
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
-        android:text="@string/genres_info"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_genres" />
 
@@ -167,4 +164,16 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@android:drawable/ic_menu_add" />
+
+    <TextView
+        android:id="@+id/tv_metascore_score"
+        android:layout_width="20dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:textColor="@color/white"
+        android:gravity="center"
+        app:layout_constraintStart_toEndOf="@+id/tv_rating_metascore"
+        app:layout_constraintTop_toBottomOf="@+id/tv_your_rating" />
 </androidx.constraintlayout.widget.ConstraintLayout>

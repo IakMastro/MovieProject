@@ -42,15 +42,27 @@ public class MovieActivity extends AppCompatActivity {
                 info = response.body();
                 binding.tvTitleMovie.setText(info.getTitle());
                 binding.tvYearMovie.setText(info.getYear());
-                Picasso.get().load(info.getPoster()).into(binding.imagePoster);
+
+                Picasso.get()
+                        .load(info.getPoster())
+                        .placeholder(R.drawable.ic_placeholder)
+                        .error(R.drawable.ic_placeholder)
+                        .fit()
+                        .into(binding.imagePoster);
                 binding.tvPlotInfo.setText(info.getPlot());
                 binding.tvRatingImdb.setText("IMDB Rating: " + info.getImdbRating());
-                binding.tvRatingMetascore.setText(" Metascore: " + info.getMetascore());
+                binding.tvMetascoreScore.setText(info.getMetascore());
                 try {
-                    binding.tvRatingMetascore.setTextColor
-                            (Integer.parseInt(info.getMetascore()) > 60 ? Color.GREEN //positive
-                                    : (Integer.parseInt(info.getMetascore()) >= 40) ? Color.parseColor("#ffcd34") //mixed
-                                    : Color.RED); //negative
+                    if (info.getMetascore().equals("N/A")) {
+                        binding.tvMetascoreScore.setText("-");
+                        binding.tvMetascoreScore.setBackgroundColor(Color.GRAY);
+                    } else {
+                        binding.tvMetascoreScore.setText(info.getMetascore());
+                        binding.tvMetascoreScore.setBackgroundColor
+                                (Integer.parseInt(info.getMetascore()) > 60 ? Color.GREEN //positive
+                                        : (Integer.parseInt(info.getMetascore()) >= 40) ? Color.parseColor("#ffcd34") //mixed
+                                        : Color.RED); //negative
+                    }
                 } catch (NumberFormatException exc) {
                     binding.tvRatingMetascore.setTextColor(Color.GRAY);
                 }

@@ -15,7 +15,7 @@
     <string name="search_movie">Search Movie</string>
     <string name="welcome">Welcome</string>
     <string name="genres">Genres</string>
-    <string name="metascore_rating">Metascore rating</string>
+    <string name="metascore_rating">Metascore</string>
     <string name="genres_info">Genres Info</string>
     <string name="previous">previous</string>
     <string name="next">next</string>
@@ -24,4 +24,7 @@
     <string name="sign_up">Sign up</string>
     <string name="plan_to_watch">Plan to Watch</string>
     <string name="profile_picture">profile_picture</string>
+    <string name="listview">ListView</string>
+    <string name="list_view">List View</string>
+    <string name="grid_view">Grid View</string>
 </resources>

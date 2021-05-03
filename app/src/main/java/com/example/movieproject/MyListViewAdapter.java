@@ -43,7 +43,7 @@ public class MyListViewAdapter extends ArrayAdapter<MovieSearch> {
                 year = info.getYear();
             }
 
-            ViewHolder vh = new ViewHolder();
+            ListViewHolder vh = new ListViewHolder();
             ListViewBinding binding = ListViewBinding.bind(convertView);
             binding.tvTitle.setText(title);
             binding.tvYear.setText(year);
@@ -66,7 +66,7 @@ public class MyListViewAdapter extends ArrayAdapter<MovieSearch> {
     }
 }
 
-class ViewHolder {
+class ListViewHolder {
     TextView title;
     TextView year;
     MovieSearch info;
