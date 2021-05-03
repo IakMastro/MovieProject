@@ -25,7 +25,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:drawableStart="@android:drawable/ic_menu_search"
         android:drawableLeft="@android:drawable/ic_menu_search"
         android:text="@string/search"
         app:layout_constraintEnd_toEndOf="parent"
@@ -34,11 +33,28 @@
 
     <ListView
         android:id="@+id/lv_results"
-        android:layout_width="381dp"
+        android:layout_width="match_parent"
         android:layout_height="522dp"
         android:layout_marginStart="@dimen/bound"
         android:layout_marginLeft="@dimen/bound"
         android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/b_search" />
+
+
+    <GridView
+        android:id="@+id/gv_results"
+        android:layout_width="match_parent"
+        android:layout_height="522dp"
+        android:layout_marginStart="@dimen/bound"
+        android:layout_marginLeft="@dimen/bound"
+        android:layout_marginTop="8dp"
+        android:columnWidth="90dp"
+        android:horizontalSpacing="1dp"
+        android:numColumns="auto_fit"
+        android:stretchMode="columnWidth"
+        android:verticalSpacing="1dp"
+        android:visibility="invisible"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/b_search" />
 
@@ -57,15 +73,15 @@
         android:layout_height="40dp"
         android:layout_marginStart="@dimen/bound"
         android:layout_marginLeft="@dimen/bound"
-        android:layout_marginBottom="@dimen/bound"
+        android:layout_marginBottom="32dp"
         android:background="@drawable/button_round"
         android:clickable="true"
         android:contentDescription="@string/previous"
+        android:focusable="true"
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/ic_baseline_arrow_back_24"
-        android:focusable="true" />
+        app:srcCompat="@drawable/ic_baseline_arrow_back_24" />
 
     <ImageButton
         android:id="@+id/ib_next"
@@ -77,10 +93,23 @@
         android:background="@drawable/button_round"
         android:clickable="true"
         android:contentDescription="@string/next"
+        android:focusable="true"
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/ic_baseline_arrow_forward_24"
-        android:focusable="true" />
+        app:srcCompat="@drawable/ic_baseline_arrow_forward_24" />
+
+
+    <ToggleButton
+        android:id="@+id/tb_list_changer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:textOff="@string/list_view"
+        android:textOn="@string/grid_view"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.514"
+        app:layout_constraintStart_toEndOf="@+id/b_search"
+        app:layout_constraintTop_toBottomOf="@+id/et_query" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
