@@ -11,7 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.example.movieproject.Activities.MovieActivity;
+import com.example.movieproject.activities.MovieActivity;
 import com.example.movieproject.POJOs.MovieSearch;
 import com.example.movieproject.databinding.ListViewBinding;
 

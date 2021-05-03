@@ -24,4 +24,16 @@
     <string name="sign_up">Sign up</string>
     <string name="plan_to_watch">Plan to Watch</string>
     <string name="profile_picture">profile_picture</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="username">Username:</string>
+    <string name="email_query">Enter email</string>
+    <string name="pwd_query">Enter password</string>
+    <string name="repeat_pwd_query">Repeat password</string>
+    <string name="username_query">Enter username</string>
 </resources>

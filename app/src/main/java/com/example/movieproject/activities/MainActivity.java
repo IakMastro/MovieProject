@@ -1,4 +1,4 @@
-package com.example.movieproject.Activities;
+package com.example.movieproject.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -22,11 +22,13 @@ public class MainActivity extends AppCompatActivity {
         stuff = new Stuff(this.getBaseContext());
 
         binding.bLogin.setOnClickListener(c -> {
-            //TODO new intent/popup? that logins
+            Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+            startActivity(intent);
         });
 
         binding.bSignUp.setOnClickListener(c -> {
-            //TODO new intent/popup? that creates an account
+            Intent intent = new Intent(getApplicationContext(), SignUpActivity.class);
+            startActivity(intent);
         });
 
         binding.bPlanList.setOnClickListener(c -> {

@@ -1,4 +1,4 @@
-package com.example.movieproject.Activities;
+package com.example.movieproject.activities;
 
 import android.graphics.Color;
 import android.os.Bundle;
@@ -17,7 +17,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import static com.example.movieproject.Activities.SearchActivity.api;
+import static com.example.movieproject.activities.SearchActivity.api;
 
 public class MovieActivity extends AppCompatActivity {
     private static final String TAG = SearchActivity.class.getSimpleName();

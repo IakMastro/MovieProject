@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/signupLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.SignUpActivity">
+
+    <TextView
+        android:id="@+id/signUpTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/sign_up"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/emailSignUp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:ems="10"
+        android:hint="@string/email_query"
+        android:inputType="textEmailAddress"
+        app:layout_constraintEnd_toEndOf="@+id/signUpTextView"
+        app:layout_constraintStart_toStartOf="@+id/signUpTextView"
+        app:layout_constraintTop_toBottomOf="@+id/signUpTextView"
+        android:autofillHints="" />
+
+    <EditText
+        android:id="@+id/usernameSignUp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:ems="10"
+        android:hint="@string/username_query"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="@+id/emailSignUp"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/emailSignUp"
+        app:layout_constraintTop_toBottomOf="@+id/emailSignUp"
+        android:autofillHints="" />
+
+    <EditText
+        android:id="@+id/pwdSignUp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:ems="10"
+        android:hint="@string/pwd_query"
+        android:inputType="textPassword"
+        app:layout_constraintEnd_toEndOf="@+id/usernameSignUp"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/usernameSignUp"
+        app:layout_constraintTop_toBottomOf="@+id/usernameSignUp"
+        android:autofillHints="" />
+
+    <EditText
+        android:id="@+id/repeatPwdSignUp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:autofillHints=""
+        android:ems="10"
+        android:hint="@string/repeat_pwd_query"
+        android:inputType="textPassword"
+        app:layout_constraintEnd_toEndOf="@+id/pwdSignUp"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/pwdSignUp"
+        app:layout_constraintTop_toBottomOf="@+id/pwdSignUp" />
+
+    <Button
+        android:id="@+id/signUpButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="68dp"
+        android:text="@string/sign_up"
+        app:layout_constraintEnd_toEndOf="@+id/repeatPwdSignUp"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="@+id/repeatPwdSignUp"
+        app:layout_constraintTop_toBottomOf="@+id/repeatPwdSignUp" />
+</androidx.constraintlayout.widget.ConstraintLayout>
